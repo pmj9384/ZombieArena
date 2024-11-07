@@ -1,7 +1,7 @@
 #pragma once
 #include "TextGo.h"
-class UiScore :
-	public TextGo
+class player;
+class UiScore : public TextGo
 {
 protected:
 	int score;

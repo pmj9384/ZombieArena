@@ -119,10 +119,12 @@ void UiUpgrade::HandleUpgradeSelection()
         // 업그레이드 아이템에 마우스 위치가 포함되어 있는지 체크
         if (upgrades[i].getGlobalBounds().contains(mouseWorldPos))
         {
+            
+            upgrades[i].setFillColor(sf::Color::Red);
+
             // 마우스 왼쪽 버튼이 클릭되었을 때 업그레이드 선택 처리
             if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
             {
-                upgrades[i].setFillColor(sf::Color::Red);
                 // 업그레이드 선택 처리
                 switch (i)
                 {
@@ -156,6 +158,11 @@ void UiUpgrade::HandleUpgradeSelection()
                 SetActive(false);  // UI 비활성화
                 ResetUpgradeState();
             }
+        
+        }
+        else
+        {
+            upgrades[i].setFillColor(sf::Color::White);
         }
     }
 }

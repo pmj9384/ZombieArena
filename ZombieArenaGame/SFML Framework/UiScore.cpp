@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UiScore.h"
+#include "Player.h"
 
 UiScore::UiScore(const std::string& fontId, const std::string& name)
 	:TextGo(fontId, name)

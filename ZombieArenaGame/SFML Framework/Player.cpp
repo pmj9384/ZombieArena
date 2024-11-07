@@ -144,7 +144,7 @@ void Player::UpdateHealthBar()
 {
 	healthBar.setFillColor(sf::Color::Red);
 	healthBar.setSize(sf::Vector2f(static_cast<float>(hp) / maxHp * 300.f, 80.f));
-	healthBar.setPosition(position.x - healthBar.getSize().x / 2, position.y + body.getGlobalBounds().height / 2 + 350.f);
+	healthBar.setPosition(position.x - healthBar.getSize().x / 2 -800, position.y + body.getGlobalBounds().height / 2 + -550.f);
 }
 
 void Player::FixedUpdate(float dt)

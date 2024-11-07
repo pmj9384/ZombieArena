@@ -12,8 +12,6 @@ public:
 	void Init() override;
 
 	void Reset() override;
-
-
 };
 
 

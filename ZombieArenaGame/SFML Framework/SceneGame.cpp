@@ -46,9 +46,10 @@ void SceneGame::Init()
 	uiMessage->SetActive(false);
 
 	uiScore->SetPosition(playerPos + sf::Vector2f(750.f, -500.f));  // 위치 설정
-	uiBulletCount->SetPosition(playerPos + sf::Vector2f(-850.f, 420.f));
-	uiWave->SetPosition(playerPos + sf::Vector2f(430.f, 450.f));  // 위치 설정
-	zombieCount->SetPosition(playerPos + sf::Vector2f(770.f, 450.f));
+	uiBulletCount->SetPosition(playerPos + sf::Vector2f(-850.f, 450.f));
+
+	uiWave->SetPosition(playerPos + sf::Vector2f(430.f, 480.f));  // 위치 설정
+	zombieCount->SetPosition(playerPos + sf::Vector2f(770.f, 480.f));
 	uiStart->SetPosition(playerPos);
 
 	currentWave = new Wave();
@@ -161,7 +162,7 @@ void SceneGame::Update(float dt)
 		/*wave->Reset();*/
 		//// 플레이어 초기화 및 활성화
 		player->SetActive(true);
-
+		zombieCount->Reset();
 		// 게임을 일시 정지 상태로 설정
 		isPaused = true;
 		uiStart->SetActive(true);
@@ -180,7 +181,7 @@ void SceneGame::Update(float dt)
 			{
 				// 다음 웨이브로 이동
 				wave->Reset();
-
+				zombieCount->Reset();
 				Wave::Types nextType = static_cast<Wave::Types>(static_cast<int>(wave->GetType()) + 1);
 				if (nextType <= Wave::Types::Wave5) 
 				{
@@ -275,10 +276,10 @@ void SceneGame::Update(float dt)
 		uiBulletCount->Update();
 
 		uiScore->SetPosition(playerPos + sf::Vector2f(750.f, -500.f));  // 위치 설정
-		uiBulletCount->SetPosition(playerPos + sf::Vector2f(-850.f, 420.f));
+		uiBulletCount->SetPosition(playerPos + sf::Vector2f(-850.f, 450.f));
 
-		uiWave->SetPosition(playerPos + sf::Vector2f(430.f, 450.f));  // 위치 설정
-		zombieCount->SetPosition(playerPos + sf::Vector2f(770.f, 450.f));
+		uiWave->SetPosition(playerPos + sf::Vector2f(430.f, 480.f));  // 위치 설정
+		zombieCount->SetPosition(playerPos + sf::Vector2f(770.f, 480.f));
 
 		/*CheckWaveCompletion();*/
 
@@ -366,6 +367,7 @@ void SceneGame::SpawnZombies(int count)
 		//} while (Utils::Distance(pos, player->GetPosition()) < 200.f);
 
 		pos = spawn.Spawn();
+		zombieCount->AddCount(1);
 		zombie->SetPosition(pos);
 		AddGo(zombie);
 		zombie->SetActive(true);
@@ -431,6 +433,7 @@ void SceneGame::OnZombieDie(Zombie* zombie)
 	if (currentWave != nullptr)
 	{
 		currentWave->ZombieKilled();  // 웨이브에 킬 추가
+		uiScore->AddScore(100);
 	}
 
 }
